@@ -129,14 +129,15 @@ export const Impact: React.FC = () => {
                       style={{ 
                         scrollbarWidth: 'none', 
                         msOverflowStyle: 'none',
-                        maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)'
+                        maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+                        touchAction: 'pan-x'
                       }}
                       onMouseDown={handleMouseDown}
                       onMouseLeave={handleMouseLeave}
                       onMouseUp={handleMouseUp}
                       onMouseMove={handleMouseMove}
                    >
-                      {countryData.map((country, idx) => (
+                      {countryData.map((country) => (
                         <div key={country.name} className="group flex flex-col items-center gap-6 flex-shrink-0 perspective-1000">
                            {/* Sphere Container */}
                            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full transition-all duration-700 ease-out group-hover:scale-110 group-hover:-translate-y-2 hover:z-20">
