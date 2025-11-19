@@ -9,7 +9,7 @@ export const Contact: React.FC = () => {
     email: '',
     inquiry: ''
   });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormState({
@@ -18,37 +18,32 @@ export const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    
-    // Construct the mailto link parameters
-    const subject = encodeURIComponent(`Makini AI Inquiry from ${formState.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formState.name}\n` +
-      `Phone: ${formState.phone}\n` +
-      `Email: ${formState.email}\n\n` +
-      `Inquiry:\n${formState.inquiry}`
-    );
 
-    const mailtoLink = `mailto:wachiradavem@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      // Encode form data for Netlify
+      const encode = (data: any) => {
+        return Object.keys(data)
+          .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+          .join('&');
+      };
 
-    // Trigger the mail client using a hidden anchor tag.
-    // This method with target="_blank" is the most robust way to bypass 
-    // "X-Frame-Options" or "Refused to connect" errors when opening 
-    // web-based mail clients (like Gmail) from inside an iframe/preview environment.
-    const link = document.createElement('a');
-    link.href = mailtoLink;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'contact',
+          ...formState
+        }),
+      });
 
-    // Show success message in UI
-    setTimeout(() => {
       setStatus('success');
-    }, 1500);
+    } catch (error) {
+      console.error("Submission failed", error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -97,94 +92,122 @@ export const Contact: React.FC = () => {
                 <div className="bg-makini-soft/20 p-6 rounded-full mb-6">
                   <CheckCircle2 size={48} className="text-makini-soft" />
                 </div>
-                <h3 className="font-serif text-3xl mb-4">Thank You</h3>
+                <h3 className="font-serif text-3xl mb-4">Received</h3>
                 <p className="text-makini-ice/80 max-w-xs leading-relaxed">
-                  Your inquiry has been prepared. Please complete the submission in your email client.
+                  Your inquiry has been securely transmitted to our team. We will be in touch shortly.
                 </p>
                 <button 
-                  onClick={() => setStatus('idle')} 
+                  onClick={() => {
+                    setStatus('idle');
+                    setFormState({ name: '', phone: '', email: '', inquiry: '' });
+                  }} 
                   className="mt-8 text-xs uppercase tracking-widest text-makini-soft hover:text-white transition-colors"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <>
+                {/* 
+                  Hidden Netlify Form for detection during build. 
+                  This allows Netlify to register the form named "contact".
+                */}
+                <form name="contact" data-netlify="true" hidden>
+                  <input type="text" name="name" />
+                  <input type="text" name="phone" />
+                  <input type="email" name="email" />
+                  <textarea name="inquiry"></textarea>
+                </form>
+
+                <form onSubmit={handleSubmit} className="space-y-8 relative z-10" data-netlify="true" name="contact">
+                  {/* Hidden input required for Netlify to route the submission correctly */}
+                  <input type="hidden" name="form-name" value="contact" />
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="group/input">
+                      <label htmlFor="name" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Name</label>
+                      <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        required
+                        maxLength={100}
+                        value={formState.name}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                    <div className="group/input">
+                      <label htmlFor="phone" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Phone Number</label>
+                      <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone"
+                        required
+                        maxLength={50}
+                        value={formState.phone}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
+                        placeholder="+1 (555) 000-0000"
+                      />
+                    </div>
+                  </div>
+
                   <div className="group/input">
-                    <label htmlFor="name" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Name</label>
+                    <label htmlFor="email" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Email Address</label>
                     <input 
-                      type="text" 
-                      id="name" 
-                      name="name" 
+                      type="email" 
+                      id="email" 
+                      name="email"
                       required
-                      value={formState.name}
+                      maxLength={100}
+                      value={formState.email}
                       onChange={handleChange}
                       className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
-                      placeholder="John Doe"
+                      placeholder="john@firm.com"
                     />
                   </div>
+
                   <div className="group/input">
-                    <label htmlFor="phone" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Phone Number</label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone"
+                    <label htmlFor="inquiry" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Inquiry</label>
+                    <textarea 
+                      id="inquiry" 
+                      name="inquiry"
                       required
-                      value={formState.phone}
+                      maxLength={2000}
+                      value={formState.inquiry}
                       onChange={handleChange}
-                      className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
-                      placeholder="+1 (555) 000-0000"
-                    />
+                      rows={4}
+                      className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 resize-none focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
+                      placeholder="Tell us about your workflow needs..."
+                    ></textarea>
                   </div>
-                </div>
 
-                <div className="group/input">
-                  <label htmlFor="email" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Email Address</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email"
-                    required
-                    value={formState.email}
-                    onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
-                    placeholder="john@firm.com"
-                  />
-                </div>
-
-                <div className="group/input">
-                  <label htmlFor="inquiry" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Inquiry</label>
-                  <textarea 
-                    id="inquiry" 
-                    name="inquiry"
-                    required
-                    value={formState.inquiry}
-                    onChange={handleChange}
-                    rows={4}
-                    className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 resize-none focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
-                    placeholder="Tell us about your workflow needs..."
-                  ></textarea>
-                </div>
-
-                <div className="pt-4">
-                  <button 
-                    type="submit" 
-                    disabled={status === 'submitting'}
-                    className="w-full bg-white text-makini-navy font-medium py-4 px-8 hover:bg-makini-ice hover:text-makini-navy hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-500 ease-out flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-[0.2em] text-xs"
-                  >
-                    {status === 'submitting' ? (
-                      <>
-                        <Loader2 size={16} className="animate-spin" /> Preparing...
-                      </>
-                    ) : (
-                      <>
-                        Send Message <Send size={16} />
-                      </>
+                  <div className="pt-4">
+                    <button 
+                      type="submit" 
+                      disabled={status === 'submitting'}
+                      className="w-full bg-white text-makini-navy font-medium py-4 px-8 hover:bg-makini-ice hover:text-makini-navy hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-500 ease-out flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-[0.2em] text-xs"
+                    >
+                      {status === 'submitting' ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" /> Transmitting...
+                        </>
+                      ) : (
+                        <>
+                          Send Message <Send size={16} />
+                        </>
+                      )}
+                    </button>
+                    {status === 'error' && (
+                      <p className="text-red-400 text-xs mt-4 text-center uppercase tracking-widest">
+                        Transmission failed. Please try again or email directly.
+                      </p>
                     )}
-                  </button>
-                </div>
-              </form>
+                  </div>
+                </form>
+              </>
             )}
           </div>
         </div>
