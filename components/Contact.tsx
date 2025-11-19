@@ -34,7 +34,7 @@ export const Contact: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encode({
-          'form-name': 'contact',
+          'form-name': 'contact', // Must match the name attribute in index.html
           ...formState
         }),
       });
@@ -107,107 +107,94 @@ export const Contact: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <>
-                {/* 
-                  Hidden Netlify Form for detection during build. 
-                  This allows Netlify to register the form named "contact".
-                */}
-                <form name="contact" data-netlify="true" hidden>
-                  <input type="text" name="name" />
-                  <input type="text" name="phone" />
-                  <input type="email" name="email" />
-                  <textarea name="inquiry"></textarea>
-                </form>
-
-                <form onSubmit={handleSubmit} className="space-y-8 relative z-10" data-netlify="true" name="contact">
-                  {/* Hidden input required for Netlify to route the submission correctly */}
-                  <input type="hidden" name="form-name" value="contact" />
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="group/input">
-                      <label htmlFor="name" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Name</label>
-                      <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        required
-                        maxLength={100}
-                        value={formState.name}
-                        onChange={handleChange}
-                        className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div className="group/input">
-                      <label htmlFor="phone" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Phone Number</label>
-                      <input 
-                        type="tel" 
-                        id="phone" 
-                        name="phone"
-                        required
-                        maxLength={50}
-                        value={formState.phone}
-                        onChange={handleChange}
-                        className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
-                        placeholder="+1 (555) 000-0000"
-                      />
-                    </div>
-                  </div>
-
+              <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+                {/* Hidden input required for Netlify to route the submission correctly */}
+                <input type="hidden" name="form-name" value="contact" />
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="group/input">
-                    <label htmlFor="email" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Email Address</label>
+                    <label htmlFor="name" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Name</label>
                     <input 
-                      type="email" 
-                      id="email" 
-                      name="email"
+                      type="text" 
+                      id="name" 
+                      name="name" 
                       required
                       maxLength={100}
-                      value={formState.email}
+                      value={formState.name}
                       onChange={handleChange}
                       className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
-                      placeholder="john@firm.com"
+                      placeholder="John Doe"
                     />
                   </div>
-
                   <div className="group/input">
-                    <label htmlFor="inquiry" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Inquiry</label>
-                    <textarea 
-                      id="inquiry" 
-                      name="inquiry"
+                    <label htmlFor="phone" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone"
                       required
-                      maxLength={2000}
-                      value={formState.inquiry}
+                      maxLength={50}
+                      value={formState.phone}
                       onChange={handleChange}
-                      rows={4}
-                      className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 resize-none focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
-                      placeholder="Tell us about your workflow needs..."
-                    ></textarea>
+                      className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
+                      placeholder="+1 (555) 000-0000"
+                    />
                   </div>
+                </div>
 
-                  <div className="pt-4">
-                    <button 
-                      type="submit" 
-                      disabled={status === 'submitting'}
-                      className="w-full bg-white text-makini-navy font-medium py-4 px-8 hover:bg-makini-ice hover:text-makini-navy hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-500 ease-out flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-[0.2em] text-xs"
-                    >
-                      {status === 'submitting' ? (
-                        <>
-                          <Loader2 size={16} className="animate-spin" /> Transmitting...
-                        </>
-                      ) : (
-                        <>
-                          Send Message <Send size={16} />
-                        </>
-                      )}
-                    </button>
-                    {status === 'error' && (
-                      <p className="text-red-400 text-xs mt-4 text-center uppercase tracking-widest">
-                        Transmission failed. Please try again or email directly.
-                      </p>
+                <div className="group/input">
+                  <label htmlFor="email" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Email Address</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email"
+                    required
+                    maxLength={100}
+                    value={formState.email}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
+                    placeholder="john@firm.com"
+                  />
+                </div>
+
+                <div className="group/input">
+                  <label htmlFor="inquiry" className="block text-xs uppercase tracking-widest text-makini-ice/60 mb-2 group-focus-within/input:text-white transition-colors">Inquiry</label>
+                  <textarea 
+                    id="inquiry" 
+                    name="inquiry"
+                    required
+                    maxLength={2000}
+                    value={formState.inquiry}
+                    onChange={handleChange}
+                    rows={4}
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-white focus:outline-none focus:border-white transition-all duration-300 placeholder-white/10 resize-none focus:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.1)]"
+                    placeholder="Tell us about your workflow needs..."
+                  ></textarea>
+                </div>
+
+                <div className="pt-4">
+                  <button 
+                    type="submit" 
+                    disabled={status === 'submitting'}
+                    className="w-full bg-white text-makini-navy font-medium py-4 px-8 hover:bg-makini-ice hover:text-makini-navy hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-500 ease-out flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-[0.2em] text-xs"
+                  >
+                    {status === 'submitting' ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" /> Transmitting...
+                      </>
+                    ) : (
+                      <>
+                        Send Message <Send size={16} />
+                      </>
                     )}
-                  </div>
-                </form>
-              </>
+                  </button>
+                  {status === 'error' && (
+                    <p className="text-red-400 text-xs mt-4 text-center uppercase tracking-widest">
+                      Transmission failed. Please try again or email directly.
+                    </p>
+                  )}
+                </div>
+              </form>
             )}
           </div>
         </div>
