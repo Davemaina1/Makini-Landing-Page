@@ -1,6 +1,5 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { Partners } from './components/Partners';
 import { Services } from './components/Services';
 import { Integrations } from './components/Integrations';
 import { Impact } from './components/Impact';
@@ -13,7 +12,6 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <Partners />
         <Services />
         <Integrations />
         <Impact />

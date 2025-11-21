@@ -129,8 +129,69 @@ export const Footer: React.FC = () => {
         {/* Ambient Footer Light */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[200px] bg-makini-royal/5 blur-[100px] pointer-events-none rounded-full"></div>
         
-        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-10 relative z-10">
           
+          {/* PARTNER SECTION: Microsoft & Google */}
+          <div className="flex flex-col items-center gap-6 mb-8 opacity-80 hover:opacity-100 transition-opacity duration-500">
+              <span className="text-makini-soft/40 uppercase tracking-[0.3em] text-[10px] font-medium">Backed By & Supported By</span>
+              
+              <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                  
+                  {/* Microsoft for Startups */}
+                  <div className="group flex items-center gap-5 cursor-default p-4 rounded-xl bg-white/0 hover:bg-white/5 transition-colors duration-500">
+                    {/* Icon Grid */}
+                    <div className="grid grid-cols-2 gap-1">
+                        {/* Colors on hover */}
+                        <div className="w-4 h-4 bg-white/90 shadow-[0_0_10px_rgba(255,255,255,0.2)] group-hover:bg-[#F25022] group-hover:shadow-[0_0_15px_rgba(242,80,34,0.5)] transition-all duration-500"></div>
+                        <div className="w-4 h-4 bg-white/90 shadow-[0_0_10px_rgba(255,255,255,0.2)] group-hover:bg-[#7FBA00] group-hover:shadow-[0_0_15px_rgba(127,186,0,0.5)] transition-all duration-500"></div>
+                        <div className="w-4 h-4 bg-white/90 shadow-[0_0_10px_rgba(255,255,255,0.2)] group-hover:bg-[#00A4EF] group-hover:shadow-[0_0_15px_rgba(0,164,239,0.5)] transition-all duration-500"></div>
+                        <div className="w-4 h-4 bg-white/90 shadow-[0_0_10px_rgba(255,255,255,0.2)] group-hover:bg-[#FFB900] group-hover:shadow-[0_0_15px_rgba(255,185,0,0.5)] transition-all duration-500"></div>
+                    </div>
+                    
+                    {/* Text */}
+                    <div className="flex flex-col">
+                        <span className="font-sans text-xl text-white tracking-tight font-semibold leading-none">Microsoft</span>
+                        <span className="font-sans text-sm text-makini-ice/60 tracking-wide font-light leading-none mt-1 group-hover:text-white transition-colors">for Startups</span>
+                    </div>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="hidden md:block h-12 w-px bg-white/10"></div>
+
+                  {/* Google Gemini Program */}
+                  <div className="group flex items-center gap-5 cursor-default p-4 rounded-xl bg-white/0 hover:bg-white/5 transition-colors duration-500">
+                    {/* Gemini Star Icon - Stacked SVGs for crossfade effect */}
+                    <div className="relative w-8 h-8">
+                        {/* 1. Default White State */}
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full text-white/90 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] absolute inset-0 transition-opacity duration-500 group-hover:opacity-0">
+                           <path d="M12 2C12 7.523 16.477 12 22 12C16.477 12 12 16.477 12 22C12 16.477 7.523 12 2 12C7.523 12 12 7.523 12 2Z" />
+                        </svg>
+
+                        {/* 2. Hover Gradient State */}
+                        <svg viewBox="0 0 24 24" className="w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_0_15px_rgba(143,73,231,0.5)]">
+                            <defs>
+                                <linearGradient id="gemini-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stopColor="#4E86F7" />
+                                    <stop offset="100%" stopColor="#8F49E7" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M12 2C12 7.523 16.477 12 22 12C16.477 12 12 16.477 12 22C12 16.477 7.523 12 2 12C7.523 12 12 7.523 12 2Z" fill="url(#gemini-gradient)" />
+                        </svg>
+                    </div>
+
+                    {/* Text */}
+                    <div className="flex flex-col">
+                        <span className="font-sans text-xl text-white tracking-tight font-semibold leading-none">Google</span>
+                        <span className="font-sans text-sm text-makini-ice/60 tracking-wide font-light leading-none mt-1 group-hover:text-white transition-colors">Gemini Program</span>
+                    </div>
+                  </div>
+
+              </div>
+          </div>
+
+          {/* Divider */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent max-w-sm"></div>
+
           {/* Social Media Section */}
           <div className="flex items-center justify-center gap-8 md:gap-12">
             {socialLinks.map((link) => (
@@ -152,7 +213,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent max-w-2xl"></div>
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent max-w-2xl mt-8"></div>
 
           {/* Legal & Copyright */}
           <div className="flex flex-col md:flex-row justify-between items-center w-full gap-6">
