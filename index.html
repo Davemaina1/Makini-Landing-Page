@@ -38,28 +38,29 @@
       }
       body {
         overflow-x: hidden; /* Prevent horizontal scroll */
-        background-color: #0D2440;
-        color: #E7F0FA;
+        background-color: #E7F0FA; /* MAKINI ICE */
+        color: #0D2440; /* MAKINI NAVY */
       }
-      /* Custom scrollbar for Webkit */
+      /* Custom scrollbar */
       ::-webkit-scrollbar {
-        width: 6px;
+        width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #0D2440;
+        background: #E7F0FA;
       }
       ::-webkit-scrollbar-thumb {
-        background: #2E5E99;
-        border-radius: 3px;
+        background: #7BA4D0; /* Soft Blue */
+        border-radius: 4px;
+        border: 2px solid #E7F0FA;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #7BA4D0;
+        background: #2E5E99; /* Royal Blue */
       }
       .glass {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.7);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.5);
       }
       /* Hide scrollbar utility */
       .no-scrollbar::-webkit-scrollbar {
