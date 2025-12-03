@@ -127,11 +127,8 @@ export const Footer: React.FC = () => {
           
           {/* Main Logo in Footer */}
           <div className="mb-6 flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-            <MakiniLogo className="w-12 h-12" />
-            <div className="flex items-baseline gap-1">
-              <span className="font-serif text-xl font-bold tracking-[0.1em] text-makini-navy">MAKINI</span>
-              <span className="text-[0.6rem] uppercase tracking-[0.3em] text-makini-royal font-bold">AI</span>
-            </div>
+            {/* Height increased to accommodate the full vertical logo with text */}
+            <MakiniLogo className="h-16 w-auto" />
           </div>
 
           {/* PARTNER SECTION: Microsoft & Google */}

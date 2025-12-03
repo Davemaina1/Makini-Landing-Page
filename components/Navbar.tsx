@@ -1,43 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Menu, X, Mail } from 'lucide-react';
 import { MakiniLogo } from './MakiniLogo';
 
 export const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Light mode navigation: Transparent at top, White glass on scroll
-  const navClasses = `fixed w-full z-50 transition-all duration-700 ${
-    isScrolled || isMobileMenuOpen
-      ? 'bg-white/80 backdrop-blur-md border-b border-makini-navy/5 py-3 shadow-sm' 
-      : 'bg-transparent py-8'
-  }`;
+  // Navbar is always white to accommodate the logo, per specific design requirements
+  const navClasses = "fixed w-full z-50 bg-white border-b border-makini-navy/5 py-2 shadow-sm transition-all duration-300";
 
   return (
     <nav className={navClasses}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo Container */}
         <a 
           href="#hero"
-          className="cursor-pointer z-50 group relative no-underline flex items-center gap-3"
+          className="cursor-pointer z-50 block"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <MakiniLogo className={`w-10 h-10 md:w-12 md:h-12 transition-all duration-500 ${isScrolled ? 'drop-shadow-none' : 'drop-shadow-sm'}`} />
-          <div className="flex flex-col justify-center">
-            <h1 className={`text-2xl font-serif font-bold tracking-[0.15em] text-makini-navy transition-all duration-500 leading-none`}>
-              MAKINI
-            </h1>
-            <span className="text-[0.65rem] uppercase tracking-[0.4em] text-makini-royal font-bold ml-1">
-              AI
-            </span>
+          {/* Logo is now an SVG component with transparency, scaled to height */}
+          <div className="h-[60px] w-auto flex items-center">
+            <MakiniLogo className="h-full w-auto" />
           </div>
         </a>
 
@@ -47,7 +29,7 @@ export const Navbar: React.FC = () => {
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className={`text-xs uppercase tracking-[0.15em] font-medium text-makini-navy/70 hover:text-makini-royal transition-colors duration-300`}
+              className="text-xs uppercase tracking-[0.15em] font-bold text-makini-navy hover:text-makini-royal transition-colors duration-300"
             >
               {item}
             </a>
@@ -55,7 +37,7 @@ export const Navbar: React.FC = () => {
           
           <a 
             href="mailto:info@makini.tech"
-            className="bg-makini-royal text-white border border-transparent px-8 py-3 text-xs uppercase tracking-[0.15em] hover:bg-makini-navy hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out rounded-sm"
+            className="bg-makini-royal text-white border border-transparent px-8 py-3 text-xs uppercase tracking-[0.15em] font-bold hover:bg-makini-navy hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out rounded-sm"
           >
             Inquire
           </a>
@@ -66,15 +48,15 @@ export const Navbar: React.FC = () => {
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
             type="button"
-            className={`text-makini-navy hover:text-makini-royal transition-colors p-2`}
+            className="text-makini-navy hover:text-makini-royal transition-colors p-2"
           >
             {isMobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay - Light Mode */}
-      <div className={`fixed inset-0 bg-makini-ice z-40 flex flex-col items-center justify-center space-y-10 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-10 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
         {['Expertise', 'Integration', 'Impact', 'Contact'].map((item) => (
           <a
             key={item}
