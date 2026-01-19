@@ -57,12 +57,18 @@ export const Hero: React.FC = () => {
         </Reveal>
 
         <Reveal width="100%" delay={0.6}>
-          <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
             <a 
                href="#expertise"
-               className="bg-makini-royal text-white px-10 py-4 text-sm uppercase tracking-[0.2em] font-medium hover:bg-makini-navy hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-out rounded-sm"
+               className="bg-makini-royal text-white px-10 py-4 text-sm uppercase tracking-[0.2em] font-medium hover:bg-makini-navy hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-out rounded-sm w-full md:w-auto"
             >
               Our Solutions
+            </a>
+            <a 
+               href="#contact"
+               className="border-2 border-makini-royal text-makini-royal px-10 py-4 text-sm uppercase tracking-[0.2em] font-bold hover:bg-makini-royal hover:text-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-out rounded-sm w-full md:w-auto"
+            >
+              Get a Demo
             </a>
           </div>
         </Reveal>

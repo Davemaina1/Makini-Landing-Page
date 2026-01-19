@@ -1,7 +1,9 @@
+
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Partners } from './components/Partners';
 import { Services } from './components/Services';
+import { Process } from './components/Process';
 import { Integrations } from './components/Integrations';
 import { Impact } from './components/Impact';
 import { Contact } from './components/Contact';
@@ -15,6 +17,7 @@ function App() {
         <Hero />
         <Partners />
         <Services />
+        <Process />
         <Integrations />
         <Impact />
         <Contact />

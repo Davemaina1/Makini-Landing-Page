@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Menu, X, Mail } from 'lucide-react';
 import { MakiniLogo } from './MakiniLogo';
@@ -7,6 +8,8 @@ export const Navbar: React.FC = () => {
 
   // Navbar is always white to accommodate the logo, per specific design requirements
   const navClasses = "fixed w-full z-50 bg-white border-b border-makini-navy/5 py-2 shadow-sm transition-all duration-300";
+
+  const navItems = ['Expertise', 'Process', 'Integration', 'Impact', 'Contact'];
 
   return (
     <nav className={navClasses}>
@@ -23,8 +26,8 @@ export const Navbar: React.FC = () => {
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-12">
-          {['Expertise', 'Integration', 'Impact', 'Contact'].map((item) => (
+        <div className="hidden md:flex items-center space-x-10">
+          {navItems.map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -56,7 +59,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-10 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-        {['Expertise', 'Integration', 'Impact', 'Contact'].map((item) => (
+        {navItems.map((item) => (
           <a
             key={item}
             href={`#${item.toLowerCase()}`}
