@@ -17,8 +17,7 @@ export const Navbar: React.FC = () => {
           className="cursor-pointer z-50 block"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          {/* Logo is now an SVG component with transparency, scaled to height */}
-          <div className="h-[60px] w-auto flex items-center">
+          <div className="h-8 w-auto flex items-center">
             <MakiniLogo className="h-full w-auto" />
           </div>
         </a>

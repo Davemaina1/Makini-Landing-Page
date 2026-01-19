@@ -126,40 +126,34 @@ export const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-10 relative z-10">
           
           {/* Main Logo in Footer */}
-          <div className="mb-6 flex flex-col items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-            {/* Height increased to accommodate the full vertical logo with text */}
-            <MakiniLogo className="h-16 w-auto" />
+          <div className="mb-6 flex flex-col items-center gap-2">
+            <div className="bg-white p-2 rounded-xl shadow-sm border border-makini-soft/20 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+              <MakiniLogo className="h-12 w-auto" />
+            </div>
           </div>
 
-          {/* PARTNER SECTION: Microsoft & Google */}
+          {/* PARTNER SECTION */}
           <div className="flex flex-col items-center gap-6 mb-8">
               <span className="text-makini-royal uppercase tracking-[0.3em] text-[10px] font-bold">Backed By & Supported By</span>
               
               <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                  
-                  {/* Microsoft for Startups */}
                   <div className="group flex items-center gap-5 cursor-default p-4 rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-500 border border-makini-soft/20">
-                    {/* Icon Grid */}
                     <div className="grid grid-cols-2 gap-1">
                         <div className="w-4 h-4 bg-[#F25022]"></div>
                         <div className="w-4 h-4 bg-[#7FBA00]"></div>
                         <div className="w-4 h-4 bg-[#00A4EF]"></div>
                         <div className="w-4 h-4 bg-[#FFB900]"></div>
                     </div>
-                    
                     <div className="flex flex-col">
                         <span className="font-sans text-xl text-makini-navy tracking-tight font-semibold leading-none">Microsoft</span>
                         <span className="font-sans text-sm text-makini-navy/60 tracking-wide font-medium leading-none mt-1">for Startups</span>
                     </div>
                   </div>
 
-                  {/* Divider */}
                   <div className="hidden md:block h-12 w-px bg-makini-navy/10"></div>
 
-                  {/* Google Gemini Program */}
                   <div className="group flex items-center gap-5 cursor-default p-4 rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-500 border border-makini-soft/20">
                     <div className="relative w-8 h-8">
-                        {/* Always show color version in light mode */}
                          <svg viewBox="0 0 24 24" className="w-full h-full absolute inset-0">
                             <defs>
                                 <linearGradient id="gemini-gradient-footer" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -170,20 +164,16 @@ export const Footer: React.FC = () => {
                             <path d="M12 2C12 7.523 16.477 12 22 12C16.477 12 12 16.477 12 22C12 16.477 7.523 12 2 12C7.523 12 12 7.523 12 2Z" fill="url(#gemini-gradient-footer)" />
                         </svg>
                     </div>
-
                     <div className="flex flex-col">
                         <span className="font-sans text-xl text-makini-navy tracking-tight font-semibold leading-none">Google</span>
                         <span className="font-sans text-sm text-makini-navy/60 tracking-wide font-medium leading-none mt-1">Gemini Program</span>
                     </div>
                   </div>
-
               </div>
           </div>
 
-          {/* Divider */}
           <div className="w-full h-px bg-makini-navy/10 max-w-sm"></div>
 
-          {/* Social Media Section */}
           <div className="flex items-center justify-center gap-8 md:gap-12">
             {socialLinks.map((link) => (
               <a 
@@ -201,10 +191,8 @@ export const Footer: React.FC = () => {
             ))}
           </div>
 
-          {/* Divider */}
           <div className="w-full h-px bg-makini-navy/10 max-w-2xl mt-8"></div>
 
-          {/* Legal & Copyright */}
           <div className="flex flex-col md:flex-row justify-between items-center w-full gap-6">
             <div className="text-xs md:text-sm tracking-widest uppercase font-medium">
               © {new Date().getFullYear()} Makini AI. All Rights Reserved.

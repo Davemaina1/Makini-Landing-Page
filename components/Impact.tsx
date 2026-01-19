@@ -60,7 +60,6 @@ export const Impact: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col gap-28 items-center">
           
-          {/* Top Section: Statistics */}
           <div className="flex flex-col items-center text-center gap-16 w-full">
             <Reveal width="100%">
               <div className="max-w-2xl mx-auto">
@@ -98,7 +97,6 @@ export const Impact: React.FC = () => {
             </div>
           </div>
 
-          {/* Bottom Section: Scrollable 3D Spheres */}
           <div className="w-full border-t border-makini-navy/10 pt-20">
              <Reveal delay={0.6} width="100%">
                 <div className="flex flex-col gap-12 items-center">
@@ -113,7 +111,6 @@ export const Impact: React.FC = () => {
                       </span>
                    </div>
                    
-                   {/* Scroll Container */}
                    <div 
                       ref={scrollRef}
                       className="flex overflow-x-auto py-12 px-4 gap-16 cursor-grab active:cursor-grabbing select-none no-scrollbar w-full justify-start md:justify-center"
@@ -129,24 +126,17 @@ export const Impact: React.FC = () => {
                    >
                       {countryData.map((country) => (
                         <div key={country.name} className="group flex flex-col items-center gap-8 flex-shrink-0">
-                           {/* Sphere Container */}
                            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full transition-all duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-2 hover:z-20 shadow-xl">
-                              
-                              {/* 1. Flag Gradient (Hover) */}
                               <div 
                                 className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 shadow-2xl"
                                 style={{ background: country.gradient }}
                               ></div>
-                              
-                              {/* 2. Default State - Navy Sphere on Light BG */}
                               <div className="absolute inset-0 rounded-full bg-makini-navy border-4 border-white group-hover:opacity-0 transition-all duration-500 z-10 flex items-center justify-center">
                                  <span className="font-serif text-3xl text-white/50 font-bold group-hover:opacity-0 transition-opacity duration-300 select-none">
                                    {country.name.substring(0, 2).toUpperCase()}
                                  </span>
                               </div>
                            </div>
-
-                           {/* Country Name Label */}
                            <div className="flex flex-col items-center opacity-60 group-hover:opacity-100 transition-all duration-500">
                              <span className="font-serif text-xl text-makini-navy font-bold tracking-wide">
                                {country.name}

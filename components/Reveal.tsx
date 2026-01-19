@@ -12,15 +12,19 @@ export const Reveal: React.FC<RevealProps> = ({ children, width = "fit-content",
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setIsVisible(true);
+      setCanOverflow(true);
+      return;
+    }
+
     let timeout: ReturnType<typeof setTimeout>;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry && entry.isIntersecting) {
           setIsVisible(true);
           observer.disconnect();
           
-          // Allow overflow after the animation duration (900ms) + delay
-          // This ensures hover shadows/transforms are not clipped
           timeout = setTimeout(() => {
             setCanOverflow(true);
           }, 900 + (delay * 1000));
@@ -32,12 +36,13 @@ export const Reveal: React.FC<RevealProps> = ({ children, width = "fit-content",
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (currentRef) observer.unobserve(currentRef);
       if (timeout) clearTimeout(timeout);
     };
   }, [delay]);

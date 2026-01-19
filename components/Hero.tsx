@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Reveal } from './Reveal';
 import { SparklesCore } from './ui/sparkles';
+import { MakiniLogo } from './MakiniLogo';
 
 export const Hero: React.FC = () => {
   return (
@@ -29,10 +30,14 @@ export const Hero: React.FC = () => {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
         <Reveal width="100%">
-          <div className="mb-8 flex flex-col items-center gap-4">
-            <div className="h-[2px] w-16 bg-makini-royal"></div>
+          <div className="mb-12 flex flex-col items-center">
+            {/* Prominent Logo Display - Height fixed to 120px */}
+            <div className="h-[120px] w-auto bg-white p-4 rounded-3xl shadow-2xl border border-makini-soft/10 mb-8 transform hover:scale-105 transition-all duration-700 animate-in fade-in zoom-in duration-1000 overflow-hidden">
+               <MakiniLogo className="h-full w-auto" />
+            </div>
+            <div className="h-[2px] w-16 bg-makini-royal mb-4"></div>
             <span className="text-makini-royal uppercase tracking-[0.3em] text-xs font-bold">
-              Automating Legal Work
+              Automating Legal Excellence
             </span>
           </div>
         </Reveal>
