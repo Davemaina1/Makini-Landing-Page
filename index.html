@@ -1,116 +1,757 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Makini AI | Legal Automation</title>
-    <meta name="description" content="Automating excellence for legal professionals." />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makini AI | AI Safety & Evaluation for Africa</title>
+    <meta name="description" content="AI is already in Africa. Nobody checked if it works. Makini AI builds the evaluation tools that change that.">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="icon" href="/logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              makini: {
-                ice: '#E7F0FA',
-                soft: '#7BA4D0',
-                royal: '#2E5E99',
-                navy: '#0D2440',
-              }
-            },
-            fontFamily: {
-              sans: ['Manrope', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-            },
-            backgroundImage: {
-              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        makini: {
+                            ice: '#E7F0FA',
+                            navy: '#0D2440',
+                            royal: '#2E5E99',
+                            soft: '#7BA4D0',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 30s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     </script>
+    
     <style>
-      html {
-        scroll-padding-top: 100px; /* Ensures scroll lands below the fixed navbar */
-      }
-      body {
-        overflow-x: hidden; /* Prevent horizontal scroll */
-        background-color: #E7F0FA; /* MAKINI ICE */
-        color: #0D2440; /* MAKINI NAVY */
-      }
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #E7F0FA;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #7BA4D0; /* Soft Blue */
-        border-radius: 4px;
-        border: 2px solid #E7F0FA;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #2E5E99; /* Royal Blue */
-      }
-      .glass {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-      }
-      /* Hide scrollbar utility */
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-    </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "vite": "https://aistudiocdn.com/vite@^7.2.2",
-    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^3.4.0",
-    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
-  }
-}
-</script>
-    <!-- Apollo Visitor Tracking -->
-    <script>
-    function initApollo(){
-      var n=Math.random().toString(36).substring(7),o=document.createElement("script");
-      o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
-      o.onload=function(){window.trackingFunctions.onLoad({appId:"68ff757a03bc31001d188851"})},
-      document.head.appendChild(o)
-    }
-    initApollo();
-    </script>
-</head>
-  <body>
-    <!-- 
-      Netlify Forms Detection 
-      This form is hidden but read by Netlify bots at build time.
-      It MUST match the name and inputs of the React form.
-    -->
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="text" name="phone" />
-      <input type="email" name="email" />
-      <textarea name="inquiry"></textarea>
-    </form>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #E7F0FA;
+            color: #0D2440;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark-card {
+            background: #0D2440;
+            color: white;
+            border-radius: 1.5rem;
+        }
+        
+        /* Reveal System */
+        .reveal { 
+            opacity: 1; 
+        }
+        
+        .js-enabled .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .js-enabled .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Progress Bar Animation */
+        .progress-fill {
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
 
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+        /* Marquee Styles */
+        .marquee-wrapper { 
+            overflow: hidden; 
+            width: 100%; 
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); 
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); 
+        }
+        .marquee-track { 
+            display: flex; 
+            align-items: center; 
+            width: max-content; 
+            animation: marqueeScroll 20s linear infinite; 
+        }
+        .marquee-track:hover { 
+            animation-play-state: paused; 
+        }
+        @keyframes marqueeScroll { 
+            from { transform: translateX(0); } 
+            to { transform: translateX(-50%); } 
+        }
+        .marquee-item { 
+            flex-shrink: 0; 
+            padding: 0 32px; 
+            transition: all 0.4s ease;
+        }
+        .marquee-item img {
+            filter: grayscale(40%) opacity(0.6);
+            transition: all 0.4s ease;
+        }
+        .marquee-item:hover img {
+            filter: none;
+            opacity: 1;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+    </style>
+</head>
+<body>
+    <script>document.documentElement.classList.add('js-enabled');</script>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-makini-navy/5 py-3">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="/public/makini-logo.png" alt="Makini AI" style="height:32px; object-fit:contain;" onerror="this.onerror=null; this.src='https://i.imgur.com/hxSVKnc.png';">
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#impact" class="text-[10px] uppercase tracking-widest font-bold hover:text-makini-royal transition-colors">Impact</a>
+                <a href="#problem" class="text-[10px] uppercase tracking-widest font-bold hover:text-makini-royal transition-colors">Problem</a>
+                <a href="#frontier" class="text-[10px] uppercase tracking-widest font-bold hover:text-makini-royal transition-colors">Frontier</a>
+                <a href="#products" class="text-[10px] uppercase tracking-widest font-bold hover:text-makini-royal transition-colors">Products</a>
+                <a href="#research" class="text-[10px] uppercase tracking-widest font-bold hover:text-makini-royal transition-colors">Research</a>
+                <a href="#contact" class="bg-makini-royal text-white px-6 py-2 rounded-full text-[10px] uppercase tracking-widest font-bold hover:bg-makini-navy transition-all">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-48 pb-24 px-6 min-h-screen flex flex-col items-center justify-center text-center relative">
+        <div class="max-w-4xl mx-auto z-10">
+            <div class="flex justify-center mb-10 animate-fade-in-up">
+                <img src="/public/makini-logo.png" alt="Makini AI" class="h-24 w-auto" onerror="this.onerror=null; this.src='https://i.imgur.com/hxSVKnc.png';">
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.4em] font-bold text-makini-royal mb-8 animate-fade-in-up" style="animation-delay: 0.1s">
+                AI Safety Research · Nairobi Kenya
+            </p>
+            <h1 class="text-5xl md:text-8xl font-serif leading-[1.1] mb-12 animate-fade-in-up" style="animation-delay: 0.3s">
+                AI is already in Africa.<br>
+                <span class="italic text-makini-royal">Nobody checked if it works.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-makini-navy/70 leading-relaxed max-w-2xl mx-auto mb-12 animate-fade-in-up" style="animation-delay: 0.5s">
+                Every major AI model (GPT, Gemini, Claude, LLaMA) was tested for safety in English. Not in Swahili. Not in Zulu. Not in Hausa. Makini AI builds the evaluation tools that change that.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.7s">
+                <a href="#products" class="bg-makini-navy text-white px-10 py-4 rounded-full font-bold hover:bg-makini-royal transition-all shadow-xl">Explore Our Tools</a>
+                <a href="#contact" class="bg-white border border-makini-navy/10 px-10 py-4 rounded-full font-bold hover:bg-makini-ice transition-all">Partner With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="py-20 bg-makini-ice/30 border-y border-makini-navy/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Supported By Strip -->
+            <div class="mb-16">
+                <p class="text-[10px] uppercase tracking-[0.4em] font-bold text-gray-500 mb-8 text-center">Supported by</p>
+                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24">
+                    <!-- Microsoft -->
+                    <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-default">
+                        <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0"  y="0"  width="10" height="10" fill="#F25022"/>
+                            <rect x="12" y="0"  width="10" height="10" fill="#7FBA00"/>
+                            <rect x="0"  y="12" width="10" height="10" fill="#00A4EF"/>
+                            <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
+                        </svg>
+                        <span class="font-semibold text-sm text-makini-navy/60">Microsoft for Startups</span>
+                    </div>
+                    <!-- Google Gemini -->
+                    <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-default">
+                        <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 4.5A6.5 6.5 0 0 0 4.5 11H8a3 3 0 0 1 3-3V4.5z" fill="#4285F4"/>
+                            <path d="M4.5 11A6.5 6.5 0 0 0 11 17.5V14a3 3 0 0 1-3-3H4.5z" fill="#34A853"/>
+                            <path d="M11 17.5A6.5 6.5 0 0 0 17.5 11H14a3 3 0 0 1-3 3v3.5z" fill="#FBBC05"/>
+                            <path d="M17.5 11A6.5 6.5 0 0 0 11 4.5V8a3 3 0 0 1 3 3h3.5z" fill="#EA4335"/>
+                            <circle cx="11" cy="11" r="2.5" fill="white"/>
+                            <path d="M11 9.5h5.5v3H11z" fill="#4285F4"/>
+                        </svg>
+                        <span class="font-semibold text-sm text-makini-navy/60">Google Gemini Program</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partners Strip -->
+            <div>
+                <p class="text-[10px] uppercase tracking-[0.4em] font-bold text-gray-500 mb-8 text-center">Partners</p>
+                <div class="marquee-wrapper">
+                    <div class="marquee-track">
+                        <!-- Set 1 -->
+                        <div class="marquee-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Bill_%26_Melinda_Gates_Foundation_logo.svg/1200px-Bill_%26_Melinda_Gates_Foundation_logo.svg.png" alt="Gates Foundation" style="height:28px; object-fit:contain;">
+                        </div>
+                        <div class="marquee-item">
+                            <img src="https://afrilabs.com/wp-content/uploads/2021/04/AfriLabs-Logo-1.png" alt="AfriLabs" style="height:28px; object-fit:contain;">
+                        </div>
+                        <div class="marquee-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" style="height:22px; object-fit:contain;">
+                        </div>
+                        <!-- Set 2 (Seamless Loop) -->
+                        <div class="marquee-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Bill_%26_Melinda_Gates_Foundation_logo.svg/1200px-Bill_%26_Melinda_Gates_Foundation_logo.svg.png" alt="Gates Foundation" style="height:28px; object-fit:contain;">
+                        </div>
+                        <div class="marquee-item">
+                            <img src="https://afrilabs.com/wp-content/uploads/2021/04/AfriLabs-Logo-1.png" alt="AfriLabs" style="height:28px; object-fit:contain;">
+                        </div>
+                        <div class="marquee-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" style="height:22px; object-fit:contain;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-12">
+                <span class="text-makini-royal uppercase tracking-[0.2em] text-xs font-bold mb-4 block">IMPACT</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-makini-navy">Our Impact</h2>
+            </div>
+            
+            <div class="reveal glass p-10 md:p-16 rounded-[3rem] shadow-xl">
+                <div class="flex flex-col lg:flex-row gap-16">
+                    <div class="flex-1">
+                        <span class="text-[10px] uppercase tracking-widest font-bold text-makini-royal mb-6 block">INITIATIVE</span>
+                        <h3 class="text-3xl md:text-4xl font-serif mb-8">The AI Bridge Initiative</h3>
+                        <p class="text-lg text-makini-navy/60 leading-relaxed mb-12">
+                            Africa has 2,000+ languages. Most of them are invisible to AI. The AI Bridge Initiative exists to fix what we call Language Data Flaring (the problem of African linguistic data that is either uncollected, lost, or stored in formats no AI system can use). We are building the bridge between oral traditions and the digital world, creating high-quality AI-ready datasets across 18 languages in four regions.
+                        </p>
+                        <div class="pt-8 border-t border-makini-navy/10">
+                            <p class="text-makini-royal font-bold text-lg">Goal: Enable 1 billion people to access digital services in their mother tongue by 2030</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 space-y-10">
+                        <!-- East Africa -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold uppercase tracking-widest text-makini-navy/40">East Africa</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Kiswahili</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Dholuo</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Kikuyu</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Luganda</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Kinyarwanda</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Amharic</span>
+                            </div>
+                        </div>
+                        <!-- West Africa -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold uppercase tracking-widest text-makini-navy/40">West Africa</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Yoruba</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Igbo</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Hausa</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Bambara</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Wolof</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Naija Pidgin</span>
+                            </div>
+                        </div>
+                        <!-- Southern Africa -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold uppercase tracking-widest text-makini-navy/40">Southern Africa</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">isiZulu</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">isiXhosa</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Setswana</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Sesotho</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Tshivenda</span>
+                                <span class="px-4 py-1.5 bg-makini-royal text-white text-xs rounded-full">Chichewa</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-24">
+                <h2 class="text-4xl md:text-6xl font-serif max-w-3xl leading-tight">
+                    You've spent billions making AI safe. <span class="italic text-makini-royal">Not for Africa.</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="reveal space-y-6" style="transition-delay: 0.1s">
+                    <div class="text-makini-royal font-serif text-4xl opacity-20">01</div>
+                    <h3 class="text-2xl font-serif">Content moderation is broken</h3>
+                    <p class="text-makini-navy/60 leading-relaxed">
+                        Models that pass safety filters in English often fail to detect toxicity, hate speech, and misinformation in African languages.
+                    </p>
+                </div>
+                <div class="reveal space-y-6" style="transition-delay: 0.2s">
+                    <div class="text-makini-royal font-serif text-4xl opacity-20">02</div>
+                    <h3 class="text-2xl font-serif">Models are deployed untested</h3>
+                    <p class="text-makini-navy/60 leading-relaxed">
+                        Billions are spent on AI safety, but almost none of it is allocated to testing performance in the contexts where the next billion users live.
+                    </p>
+                </div>
+                <div class="reveal space-y-6" style="transition-delay: 0.3s">
+                    <div class="text-makini-royal font-serif text-4xl opacity-20">03</div>
+                    <h3 class="text-2xl font-serif">No accountability, no measurement</h3>
+                    <p class="text-makini-navy/60 leading-relaxed">
+                        Without standardized benchmarks, labs cannot prove their models are safe for African markets, and regulators have no way to measure risk.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frontier Section -->
+    <section id="frontier" class="py-32 px-6 bg-makini-navy text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-24 items-center">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-6xl font-serif mb-12">
+                        Africa is the <span class="italic text-makini-soft">next AI frontier.</span>
+                    </h2>
+                    
+                    <div class="space-y-12">
+                        <div class="flex gap-8 items-start">
+                            <div class="text-5xl font-serif text-makini-soft">1.4B</div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Next Billion Users</h4>
+                                <p class="opacity-60 leading-relaxed">The population of Africa is the fastest growing digital market globally.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-8 items-start">
+                            <div class="text-5xl font-serif text-makini-soft">2,000+</div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Linguistic Diversity</h4>
+                                <p class="opacity-60 leading-relaxed">Languages spoken across the continent, mostly low-resource for AI.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-8 items-start">
+                            <div class="text-5xl font-serif text-makini-soft">6 of 10</div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Economic Momentum</h4>
+                                <p class="opacity-60 leading-relaxed">Of the world's fastest growing economies are in Africa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="dark-card p-10 border border-white/10 shadow-2xl bg-white/5 backdrop-blur-xl">
+                        <h3 class="text-xl font-serif mb-10">Market Readiness Indicators</h3>
+                        <div class="space-y-10">
+                            <div class="space-y-3">
+                                <div class="flex justify-between text-sm">
+                                    <span class="font-bold uppercase tracking-widest text-[10px] opacity-60">AI Adoption Rate in African Enterprise</span>
+                                    <span class="text-makini-soft font-bold">34%</span>
+                                </div>
+                                <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="progress-fill h-full bg-makini-soft" data-width="34%"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex justify-between text-sm">
+                                    <span class="font-bold uppercase tracking-widest text-[10px] opacity-60">Mobile Internet Penetration</span>
+                                    <span class="text-makini-soft font-bold">28%</span>
+                                </div>
+                                <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="progress-fill h-full bg-makini-soft" data-width="28%"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex justify-between text-sm">
+                                    <span class="font-bold uppercase tracking-widest text-[10px] opacity-60">Youth Population Share by 2050</span>
+                                    <span class="text-makini-soft font-bold">60%</span>
+                                </div>
+                                <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="progress-fill h-full bg-makini-soft" data-width="60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-12 text-xs opacity-40 italic leading-relaxed">
+                            Data represents the structural shift toward a digital-first economy across Sub-Saharan Africa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-20">
+                <h2 class="text-4xl md:text-5xl font-serif mb-6">Five tools. <span class="italic">One mission.</span></h2>
+                <p class="text-makini-navy/60 max-w-2xl leading-relaxed">
+                    We provide the technical infrastructure needed to verify that AI models are safe, accurate, and fair for African users.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 01 Spotlight -->
+                <div class="reveal bg-white/50 p-10 rounded-[2rem] flex flex-col h-full hover:shadow-2xl transition-all lg:col-span-3 lg:flex-row gap-12 border border-white/60" style="transition-delay: 0.1s">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4 mb-8">
+                            <span class="text-xs font-bold text-makini-royal/40">01</span>
+                            <div class="w-12 h-12 rounded-2xl bg-makini-royal/10 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-makini-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-serif mb-4">Bias Detection</h3>
+                        <p class="text-makini-navy/60 leading-relaxed">
+                            100K+ annotated sentences, Swahili and Zulu, 6 bias categories. We identify where models fail to understand regional nuances.
+                        </p>
+                    </div>
+                    <div class="flex-1 bg-white/40 p-6 rounded-2xl border border-white/60 space-y-6">
+                        <p class="text-[10px] font-bold uppercase tracking-widest opacity-40">Mock Classifier Visual</p>
+                        <div class="space-y-4">
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-[10px] font-bold uppercase"><span>Tribal Bias</span> <span class="text-red-500">82%</span></div>
+                                <div class="h-1.5 bg-makini-navy/5 rounded-full overflow-hidden"><div class="h-full bg-red-500 w-[82%]"></div></div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-[10px] font-bold uppercase"><span>Gender Bias</span> <span class="text-orange-500">45%</span></div>
+                                <div class="h-1.5 bg-makini-navy/5 rounded-full overflow-hidden"><div class="h-full bg-orange-500 w-[45%]"></div></div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-[10px] font-bold uppercase"><span>Regional Dialect</span> <span class="text-makini-royal">12%</span></div>
+                                <div class="h-1.5 bg-makini-navy/5 rounded-full overflow-hidden"><div class="h-full bg-makini-royal w-[12%]"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 02 -->
+                <div class="reveal glass p-10 rounded-[2rem] flex flex-col h-full hover:shadow-2xl transition-all" style="transition-delay: 0.2s">
+                    <div class="flex items-center gap-4 mb-8">
+                        <span class="text-xs font-bold text-makini-royal/40">02</span>
+                        <div class="w-12 h-12 rounded-2xl bg-makini-royal/10 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-makini-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-4">Content Moderation</h3>
+                    <p class="text-makini-navy/60 leading-relaxed">
+                        Testing how models handle hate speech and harmful content in local contexts where direct translations fail.
+                    </p>
+                </div>
+                <!-- Card 03 -->
+                <div class="reveal glass p-10 rounded-[2rem] flex flex-col h-full hover:shadow-2xl transition-all" style="transition-delay: 0.3s">
+                    <div class="flex items-center gap-4 mb-8">
+                        <span class="text-xs font-bold text-makini-royal/40">03</span>
+                        <div class="w-12 h-12 rounded-2xl bg-makini-royal/10 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-makini-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.691.34a2 2 0 01-1.788 0l-.691-.34a6 6 0 00-3.86-.517l-2.387.477a2 2 0 00-1.022.547V18a2 2 0 002 2h11a2 2 0 002-2v-2.572zM12 11V3m0 0L9 6m3-3l3 3"/></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-4">Model Accuracy</h3>
+                    <p class="text-makini-navy/60 leading-relaxed">
+                        Rigorous factual accuracy audits for models deployed in African markets, focusing on local history and geography.
+                    </p>
+                </div>
+                <!-- Card 04 -->
+                <div class="reveal glass p-10 rounded-[2rem] flex flex-col h-full hover:shadow-2xl transition-all" style="transition-delay: 0.4s">
+                    <div class="flex items-center gap-4 mb-8">
+                        <span class="text-xs font-bold text-makini-royal/40">04</span>
+                        <div class="w-12 h-12 rounded-2xl bg-makini-royal/10 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-makini-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-4">Language Benchmarking</h3>
+                    <p class="text-makini-navy/60 leading-relaxed">
+                        Africa's equivalent of GLUE/HellaSwag. The definitive standard for measuring LLM performance in low-resource languages.
+                    </p>
+                </div>
+                <!-- Card 05 -->
+                <div class="reveal glass p-10 rounded-[2rem] flex flex-col h-full hover:shadow-2xl transition-all" style="transition-delay: 0.5s">
+                    <div class="flex items-center gap-4 mb-8">
+                        <span class="text-xs font-bold text-makini-royal/40">05</span>
+                        <div class="w-12 h-12 rounded-2xl bg-makini-royal/10 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-makini-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-4">Policy Advisory</h3>
+                    <p class="text-makini-navy/60 leading-relaxed">
+                        Helping governments and organizations build frameworks for responsible AI deployment across the continent.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20">
+                <div class="reveal">
+                    <span class="text-makini-royal uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Our Research</span>
+                    <h2 class="text-4xl md:text-5xl font-serif">Open science for <span class="italic font-normal">safer AI.</span></h2>
+                </div>
+                <div class="reveal mt-8 md:mt-0">
+                    <a href="#" class="text-makini-royal font-bold border-b-2 border-makini-royal/20 pb-1 hover:border-makini-royal transition-all">View all publications</a>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="reveal p-8 border border-makini-navy/5 rounded-3xl hover:bg-makini-ice transition-colors">
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-makini-ice px-2 py-1 rounded text-makini-royal">NLP</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-makini-ice px-2 py-1 rounded text-makini-royal">Safety</span>
+                    </div>
+                    <h3 class="text-xl font-serif mb-6 leading-tight">Measuring Toxicity in Swahili Social Media</h3>
+                    <div class="flex items-center justify-between pt-6 border-t border-makini-navy/5">
+                        <span class="text-sm opacity-60">Makini AI Research</span>
+                        <span class="text-sm font-bold">2024</span>
+                    </div>
+                </div>
+                <div class="reveal p-8 border border-makini-navy/5 rounded-3xl hover:bg-makini-ice transition-colors">
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-makini-ice px-2 py-1 rounded text-makini-royal">Evaluation</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-makini-ice px-2 py-1 rounded text-makini-royal">Bias</span>
+                    </div>
+                    <h3 class="text-xl font-serif mb-6 leading-tight">Regional Bias in Large Language Models</h3>
+                    <div class="flex items-center justify-between pt-6 border-t border-makini-navy/5">
+                        <span class="text-sm opacity-60">Makini AI Research</span>
+                        <span class="text-sm font-bold">2023</span>
+                    </div>
+                </div>
+                <div class="reveal p-8 border border-makini-navy/5 rounded-3xl hover:bg-makini-ice transition-colors">
+                    <div class="flex gap-2 mb-6">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-makini-ice px-2 py-1 rounded text-makini-royal">Datasets</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-makini-ice px-2 py-1 rounded text-makini-royal">Africa</span>
+                    </div>
+                    <h3 class="text-xl font-serif mb-6 leading-tight">Low-Resource Language Benchmarking</h3>
+                    <div class="flex items-center justify-between pt-6 border-t border-makini-navy/5">
+                        <span class="text-sm opacity-60">Makini AI Research</span>
+                        <span class="text-sm font-bold">2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Quote -->
+    <section class="py-32 bg-makini-navy text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <div class="reveal">
+                <span class="text-makini-soft uppercase tracking-[0.3em] text-xs font-bold mb-12 block">The Mission</span>
+                <blockquote class="text-3xl md:text-5xl font-serif leading-tight mb-16">
+                    "We are not just building tools. We are building the <span class="italic text-makini-soft">trust layer</span> that allows AI to serve the next billion users without causing harm."
+                </blockquote>
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 rounded-full bg-makini-soft/20 border border-white/10 mb-6 overflow-hidden">
+                        <img src="https://picsum.photos/seed/nairobi/100/100" alt="Research Team" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-bold text-lg">Makini AI Research Team</p>
+                    <p class="text-sm opacity-60">Nairobi Kenya</p>
+                </div>
+            </div>
+        </div>
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] border border-white rounded-full"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white rounded-full"></div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-32 px-6 bg-makini-ice">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-4xl font-serif mb-4">Frequently Asked Questions</h2>
+                <p class="opacity-60">Everything you need to know about AI safety in Africa.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="reveal glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center font-bold text-makini-navy">
+                        Why do African languages need separate evaluation?
+                        <svg class="w-5 h-5 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="px-8 pb-6 opacity-70 leading-relaxed">
+                        Direct translation of safety benchmarks fails because cultural context, idioms, and harm categories differ significantly. A model that is safe in English can still generate tribal hate speech or dangerous medical advice in Swahili because it wasn't trained or tested on those specific linguistic risks.
+                    </div>
+                </div>
+                <div class="reveal glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center font-bold text-makini-navy">
+                        Which languages do you currently support?
+                        <svg class="w-5 h-5 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="px-8 pb-6 opacity-70 leading-relaxed">
+                        We have deep benchmarking data for Swahili, Zulu, Hausa, Amharic, and Yoruba. Our roadmap includes expanding to the top 20 most spoken African languages by the end of the year.
+                    </div>
+                </div>
+                <div class="reveal glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center font-bold text-makini-navy">
+                        How do you collect your evaluation data?
+                        <svg class="w-5 h-5 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="px-8 pb-6 opacity-70 leading-relaxed">
+                        We work with a network of 500+ certified native speakers and linguists across the continent who annotate sentences for bias, toxicity, and cultural relevance. This human-in-the-loop approach ensures our benchmarks are grounded in real-world usage.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-24 items-center">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-6xl font-serif mb-8 leading-tight">
+                        If you're deploying AI in Africa, <span class="italic">talk to us first.</span>
+                    </h2>
+                    <p class="text-xl opacity-60 mb-12 leading-relaxed">
+                        We partner with labs, governments, and enterprise teams to ensure their technology is safe for the next billion users.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-makini-royal/10 flex items-center justify-center text-makini-royal font-bold">@</div>
+                            <span class="font-bold">hello@makini.ai</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-makini-royal/10 flex items-center justify-center text-makini-royal font-bold">L</div>
+                            <span class="font-bold">Nairobi Kenya</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="glass p-10 md:p-16 rounded-[3rem] shadow-2xl">
+                        <form name="contact" method="POST" data-netlify="true" class="space-y-8">
+                            <input type="hidden" name="form-name" value="contact">
+                            <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+                            
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="space-y-3">
+                                    <label class="text-[10px] uppercase tracking-widest font-bold opacity-40">Full Name</label>
+                                    <input type="text" name="name" required class="w-full bg-transparent border-b border-makini-navy/10 py-3 focus:outline-none focus:border-makini-royal transition-colors">
+                                </div>
+                                <div class="space-y-3">
+                                    <label class="text-[10px] uppercase tracking-widest font-bold opacity-40">Email Address</label>
+                                    <input type="email" name="email" required class="w-full bg-transparent border-b border-makini-navy/10 py-3 focus:outline-none focus:border-makini-royal transition-colors">
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <label class="text-[10px] uppercase tracking-widest font-bold opacity-40">Organization</label>
+                                <input type="text" name="organization" required class="w-full bg-transparent border-b border-makini-navy/10 py-3 focus:outline-none focus:border-makini-royal transition-colors">
+                            </div>
+                            <div class="space-y-3">
+                                <label class="text-[10px] uppercase tracking-widest font-bold opacity-40">Message</label>
+                                <textarea name="message" required rows="4" class="w-full bg-transparent border-b border-makini-navy/10 py-3 focus:outline-none focus:border-makini-royal transition-colors resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-makini-royal text-white py-5 rounded-full font-bold hover:bg-makini-navy transition-all shadow-lg">Send Inquiry</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 px-6 bg-makini-navy text-white/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12 mb-16">
+                <a href="#" class="flex items-center gap-2">
+                    <img src="/public/makini-logo.png" alt="Makini AI" style="height:28px; object-fit:contain;" onerror="this.onerror=null; this.src='https://i.imgur.com/hxSVKnc.png';">
+                </a>
+                <div class="flex gap-12 text-xs uppercase tracking-widest font-bold">
+                    <a href="#impact" class="hover:text-white transition-colors">Impact</a>
+                    <a href="#problem" class="hover:text-white transition-colors">Problem</a>
+                    <a href="#frontier" class="hover:text-white transition-colors">Frontier</a>
+                    <a href="#products" class="hover:text-white transition-colors">Products</a>
+                    <a href="#research" class="hover:text-white transition-colors">Research</a>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.2em] font-bold">
+                <p>© 2025 Makini AI Limited · Nairobi Kenya</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger progress bars
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Safety timeout
+        setTimeout(() => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.classList.add('visible');
+                const progressBars = el.querySelectorAll('.progress-fill');
+                progressBars.forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            });
+        }, 3000);
+
+        // Initial check for elements in viewport
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.classList.add('visible');
+                    const progressBars = el.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>

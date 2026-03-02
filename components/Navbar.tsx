@@ -9,7 +9,14 @@ export const Navbar: React.FC = () => {
   // Navbar is always white to accommodate the logo, per specific design requirements
   const navClasses = "fixed w-full z-50 bg-white border-b border-makini-navy/5 py-2 shadow-sm transition-all duration-300";
 
-  const navItems = ['Expertise', 'Process', 'Integration', 'Impact', 'Contact'];
+  const navItems = [
+    { name: 'Problem', id: 'problem' },
+    { name: 'Why Africa', id: 'why-africa' },
+    { name: 'Products', id: 'products' },
+    { name: 'Research', id: 'research' },
+    { name: 'FAQ', id: 'faq' },
+    { name: 'Contact', id: 'contact' }
+  ];
 
   return (
     <nav className={navClasses}>
@@ -26,20 +33,20 @@ export const Navbar: React.FC = () => {
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-10">
+        <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-xs uppercase tracking-[0.15em] font-bold text-makini-navy hover:text-makini-royal transition-colors duration-300"
+              key={item.name}
+              href={`#${item.id}`}
+              className="text-[10px] uppercase tracking-[0.15em] font-bold text-makini-navy hover:text-makini-royal transition-colors duration-300"
             >
-              {item}
+              {item.name}
             </a>
           ))}
           
           <a 
-            href="mailto:info@makini.tech"
-            className="bg-makini-royal text-white border border-transparent px-8 py-3 text-xs uppercase tracking-[0.15em] font-bold hover:bg-makini-navy hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out rounded-sm"
+            href="#contact"
+            className="bg-makini-royal text-white border border-transparent px-6 py-2.5 text-[10px] uppercase tracking-[0.15em] font-bold hover:bg-makini-navy hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ease-out rounded-sm"
           >
             Inquire
           </a>
@@ -58,23 +65,23 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-10 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+      <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-8 transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
         {navItems.map((item) => (
           <a
-            key={item}
-            href={`#${item.toLowerCase()}`}
+            key={item.name}
+            href={`#${item.id}`}
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-3xl font-serif text-makini-navy hover:text-makini-royal transition-colors tracking-wide"
+            className="text-2xl font-serif text-makini-navy hover:text-makini-royal transition-colors tracking-wide"
           >
-            {item}
+            {item.name}
           </a>
         ))}
         <a 
-            href="mailto:info@makini.tech"
+            href="mailto:hello@makini.ai"
             onClick={() => setIsMobileMenuOpen(false)}
             className="flex items-center gap-3 text-makini-royal text-lg mt-8 font-medium tracking-wide"
         >
-          <Mail size={18} /> info@makini.tech
+          <Mail size={18} /> hello@makini.ai
         </a>
       </div>
     </nav>

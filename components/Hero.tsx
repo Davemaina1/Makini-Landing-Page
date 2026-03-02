@@ -43,17 +43,21 @@ export const Hero: React.FC = () => {
         </Reveal>
 
         <Reveal width="100%" delay={0.2}>
-          <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl leading-[1] mb-10 tracking-tight text-makini-navy">
-            Efficiency, <br />
-            <span className="italic text-makini-royal/90 font-light">Perfected.</span>
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] mb-10 tracking-tight text-makini-navy">
+            AI is already in Africa. <br />
+            <span className="italic text-makini-royal/90 font-light text-4xl md:text-6xl lg:text-7xl">Nobody checked if it works.</span>
           </h1>
         </Reveal>
 
         <Reveal width="100%" delay={0.4}>
-          <p className="max-w-2xl mx-auto text-makini-navy/80 text-lg md:text-xl font-normal leading-relaxed mb-16 tracking-wide">
-            We engineer custom workflow automations and AI solutions for in-house counsel and law firms. 
-            Submit work early. Fulfill requests precisely. Track perfectly.
-          </p>
+          <div className="max-w-3xl mx-auto space-y-8 mb-16">
+            <p className="text-makini-navy/80 text-lg md:text-xl font-normal leading-relaxed tracking-wide">
+              Every major AI model — GPT, Gemini, Claude, LLaMA — was tested for safety in English. Not in Swahili. Not in Zulu. Not in Hausa. Makini AI builds the evaluation tools that change that.
+            </p>
+            <p className="text-makini-navy/60 text-base md:text-lg font-medium leading-relaxed italic">
+              We build the evaluation infrastructure that holds AI accountable in African languages so that the next billion users are not left behind.
+            </p>
+          </div>
         </Reveal>
 
         <Reveal width="100%" delay={0.6}>

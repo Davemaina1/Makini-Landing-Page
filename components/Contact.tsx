@@ -1,192 +1,109 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Send, Mail, MapPin, Globe } from 'lucide-react';
 import { Reveal } from './Reveal';
-import { Send, CheckCircle2, Loader2 } from 'lucide-react';
 
 export const Contact: React.FC = () => {
-  const [formState, setFormState] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    inquiry: ''
-  });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('submitting');
-
-    try {
-      const params = new URLSearchParams();
-      params.append('form-name', 'contact');
-      Object.entries(formState).forEach(([key, value]) => {
-        params.append(key, value as string);
-      });
-
-      await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
-      });
-
-      setStatus('success');
-    } catch (error) {
-      console.error("Submission failed", error);
-      setStatus('error');
-    }
-  };
-
   return (
-    <section id="contact" className="py-40 bg-makini-ice text-makini-navy border-t border-makini-navy/5 relative">
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-          
-          {/* Text Column */}
-          <div className="flex flex-col justify-center">
-            <Reveal width="100%">
-               <span className="text-makini-royal uppercase tracking-[0.2em] text-xs font-bold mb-6 block">
-                Get in Touch
-               </span>
-            </Reveal>
-
-            <Reveal width="100%" delay={0.2}>
-              <h2 className="font-serif text-5xl md:text-7xl mb-8 leading-tight text-makini-navy">
-                Elevate Your <br/> Practice
+    <section id="contact" className="py-24 bg-white/50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <Reveal width="100%">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-serif text-makini-navy mb-8">
+                If you're deploying AI in Africa, <span className="italic font-normal">talk to us first.</span>
               </h2>
-            </Reveal>
-            
-            <Reveal width="100%" delay={0.3}>
-              <p className="text-xl font-normal mb-12 text-makini-navy/70 leading-relaxed">
-                Contact us to diagnose your workflow and build the custom automation your firm deserves.
+              <p className="text-xl text-makini-navy/60 mb-12 leading-relaxed">
+                We partner with labs, governments, and enterprise teams to ensure their technology is safe for the next billion users.
               </p>
-            </Reveal>
 
-            <Reveal width="100%" delay={0.4}>
-              <div className="space-y-4 text-makini-navy/70 font-medium">
-                <p>General Inquiries: <a href="mailto:info@makini.tech" className="text-makini-royal border-b border-makini-royal/30 pb-1 hover:border-makini-royal transition-colors">info@makini.tech</a></p>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Form Column */}
-          <div className="bg-white p-10 md:p-12 rounded-sm shadow-xl border border-makini-soft/10">
-            
-            {status === 'success' ? (
-              <div className="h-full min-h-[400px] flex flex-col items-center justify-center text-center animate-in fade-in zoom-in duration-500">
-                <div className="bg-makini-ice p-6 rounded-full mb-6">
-                  <CheckCircle2 size={48} className="text-makini-royal" />
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-makini-royal/10 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-makini-royal" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-makini-navy/40">Email</p>
+                    <p className="font-medium">hello@makini.ai</p>
+                  </div>
                 </div>
-                <h3 className="font-serif text-3xl mb-4 text-makini-navy">Received</h3>
-                <p className="text-makini-navy/70 max-w-xs leading-relaxed">
-                  Your inquiry has been securely transmitted to our team. We will be in touch shortly.
-                </p>
-                <button 
-                  onClick={() => {
-                    setStatus('idle');
-                    setFormState({ name: '', phone: '', email: '', inquiry: '' });
-                  }} 
-                  className="mt-8 text-xs uppercase tracking-widest text-makini-royal font-bold hover:text-makini-navy transition-colors"
-                >
-                  Send another message
-                </button>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-makini-royal/10 flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-makini-royal" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-makini-navy/40">Location</p>
+                    <p className="font-medium">Nairobi, Kenya</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-makini-royal/10 flex items-center justify-center">
+                    <Globe className="w-5 h-5 text-makini-royal" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-makini-navy/40">Global Reach</p>
+                    <p className="font-medium">Serving 40+ African nations</p>
+                  </div>
+                </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+            </div>
+          </Reveal>
+
+          <Reveal width="100%" delay={0.2}>
+            <div className="glass p-8 md:p-12 rounded-[2rem] border-white/60 shadow-2xl">
+              <form name="contact" method="POST" data-netlify="true" className="space-y-6">
                 <input type="hidden" name="form-name" value="contact" />
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="group/input">
-                    <label htmlFor="name" className="block text-xs uppercase tracking-widest text-makini-navy/60 mb-2 font-bold">Name</label>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-makini-navy/60">Full Name</label>
                     <input 
                       type="text" 
-                      id="name" 
-                      name="name" 
+                      name="name"
                       required
-                      maxLength={100}
-                      value={formState.name}
-                      onChange={handleChange}
-                      className="w-full bg-makini-ice/30 border-b-2 border-makini-soft/30 py-3 text-makini-navy focus:outline-none focus:border-makini-royal transition-all duration-300 placeholder-makini-navy/30"
-                      placeholder="John Doe"
+                      className="w-full px-6 py-4 bg-white/50 rounded-2xl border border-makini-soft/20 focus:outline-none focus:border-makini-royal transition-colors"
+                      placeholder="Jane Doe"
                     />
                   </div>
-                  <div className="group/input">
-                    <label htmlFor="phone" className="block text-xs uppercase tracking-widest text-makini-navy/60 mb-2 font-bold">Phone Number</label>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-makini-navy/60">Email Address</label>
                     <input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone"
+                      type="email" 
+                      name="email"
                       required
-                      maxLength={50}
-                      value={formState.phone}
-                      onChange={handleChange}
-                      className="w-full bg-makini-ice/30 border-b-2 border-makini-soft/30 py-3 text-makini-navy focus:outline-none focus:border-makini-royal transition-all duration-300 placeholder-makini-navy/30"
-                      placeholder="+1 (555) 000-0000"
+                      className="w-full px-6 py-4 bg-white/50 rounded-2xl border border-makini-soft/20 focus:outline-none focus:border-makini-royal transition-colors"
+                      placeholder="jane@organization.com"
                     />
                   </div>
                 </div>
-
-                <div className="group/input">
-                  <label htmlFor="email" className="block text-xs uppercase tracking-widest text-makini-navy/60 mb-2 font-bold">Email Address</label>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-makini-navy/60">Organization</label>
                   <input 
-                    type="email" 
-                    id="email" 
-                    name="email"
+                    type="text" 
+                    name="organization"
                     required
-                    maxLength={100}
-                    value={formState.email}
-                    onChange={handleChange}
-                    className="w-full bg-makini-ice/30 border-b-2 border-makini-soft/30 py-3 text-makini-navy focus:outline-none focus:border-makini-royal transition-all duration-300 placeholder-makini-navy/30"
-                    placeholder="john@firm.com"
+                    className="w-full px-6 py-4 bg-white/50 rounded-2xl border border-makini-soft/20 focus:outline-none focus:border-makini-royal transition-colors"
+                    placeholder="AI Lab / Government Agency"
                   />
                 </div>
-
-                <div className="group/input">
-                  <label htmlFor="inquiry" className="block text-xs uppercase tracking-widest text-makini-navy/60 mb-2 font-bold">Inquiry</label>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-makini-navy/60">Message</label>
                   <textarea 
-                    id="inquiry" 
-                    name="inquiry"
+                    name="message"
                     required
-                    maxLength={2000}
-                    value={formState.inquiry}
-                    onChange={handleChange}
                     rows={4}
-                    className="w-full bg-makini-ice/30 border-b-2 border-makini-soft/30 py-3 text-makini-navy focus:outline-none focus:border-makini-royal transition-all duration-300 placeholder-makini-navy/30 resize-none"
-                    placeholder="Tell us about your workflow needs..."
+                    className="w-full px-6 py-4 bg-white/50 rounded-2xl border border-makini-soft/20 focus:outline-none focus:border-makini-royal transition-colors resize-none"
+                    placeholder="How can we help you evaluate your models?"
                   ></textarea>
                 </div>
-
-                <div className="pt-6">
-                  <button 
-                    type="submit" 
-                    disabled={status === 'submitting'}
-                    className="w-full bg-makini-royal text-white font-bold py-4 px-8 hover:bg-makini-navy hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ease-out flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-[0.2em] text-xs rounded-sm"
-                  >
-                    {status === 'submitting' ? (
-                      <>
-                        <Loader2 size={16} className="animate-spin" /> Transmitting...
-                      </>
-                    ) : (
-                      <>
-                        Send Message <Send size={16} />
-                      </>
-                    )}
-                  </button>
-                  {status === 'error' && (
-                    <p className="text-red-500 text-xs mt-4 text-center uppercase tracking-widest">
-                      Transmission failed. Please try again or email directly.
-                    </p>
-                  )}
-                </div>
+                <button 
+                  type="submit"
+                  className="w-full py-5 bg-makini-royal text-white rounded-2xl font-bold hover:bg-makini-navy transition-all hover:shadow-xl flex items-center justify-center gap-2 group"
+                >
+                  Send Inquiry
+                  <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </button>
               </form>
-            )}
-          </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
